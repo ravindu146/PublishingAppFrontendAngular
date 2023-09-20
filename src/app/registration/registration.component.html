@@ -1,0 +1,48 @@
+<div class="container mt-4" >
+  <h1>User Registration</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input formControlName="name" type="text" class="form-control" id="name"  placeholder="Enter name">
+      <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+          <div *ngIf="f.name.errors.required">Name is required.</div>
+          <div *ngIf="f.name.errors.minlength">Name should have more than 3 characters.
+        </div>
+    </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile Number</label>
+      <input type="text" formControlName="mobile" class="form-control" id="mobile"  placeholder="Enter mobile">
+      <div *ngIf="f.mobile.touched && f.mobile.invalid" class="alert alert-danger">
+        <div *ngIf="f.mobile.errors.required">Mobile Number is required.</div>
+        <div *ngIf="f.mobile.errors.minlength || f.mobile.errors.maxLength "> Mobile Number should have 10 Numbers to be exact</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+        <div *ngIf="f.email.errors.required">Email is required.</div>
+        <div *ngIf="f.email.errors.email">Please, enter valid email address.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+        <div *ngIf="f.password.errors.required">Name is required.</div>
+        <div *ngIf="f.password.errors.minlength">Name should be 3 character.</div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- <button type="submit" (click)="save()" class="btn btn-primary">Submit</button> -->
+    <button type="submit" [disabled]="!form.valid"  class="btn btn-primary">Submit</button>
+  </form>
+</div>
+

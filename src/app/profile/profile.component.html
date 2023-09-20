@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h1>User Profile</h1>
+  <div *ngIf="userData">
+    <p><strong>Name:</strong> {{ userData.name }}</p>
+    <p><strong>Email:</strong> {{ userData.email }}</p>
+    <p><strong>Mobile:</strong> {{ userData.mobile }}</p>
+
+    <button type="button" class="btn btn-primary" (click)="goToEditPage()">Edit Details</button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="goToNewPostPage()">Add a new Post</button>
+
+    <!-- Display user's posts -->
+    <div class="mt-4" *ngIf="postDataForUser && postDataForUser.length > 0">
+      <h2>Your Posts</h2>
+      <div *ngFor="let post of postDataForUser" class="card post-card">
+        <div class="card-body">
+          <h3 class="card-title">{{ post.topic }}</h3>
+          <p class="card-text">{{ post.content }}</p>
+          <!-- Add more details as needed -->
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!(postDataForUser && postDataForUser.length > 0)">
+      <p>You haven't created any posts yet.</p>
+    </div>
+  </div>
+  <div *ngIf="!userData">
+    <p>Loading user data...</p>
+  </div>
+
+  <button type="button" class="btn btn-danger position-absolute top-0 end-0 mt-2 me-2" (click)="logout()">Logout</button>
+</div>
