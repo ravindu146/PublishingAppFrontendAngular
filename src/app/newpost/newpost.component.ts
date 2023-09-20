@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-newpost',
@@ -19,6 +20,8 @@ export class NewpostComponent implements OnInit {
   form = new FormGroup({
     topic: new FormControl('', [Validators.required, Validators.minLength(3)]),
     content: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    startDateControl: new FormControl(null),
+    endDateControl: new FormControl(null)
   });
 
   get f(){
@@ -27,13 +30,17 @@ export class NewpostComponent implements OnInit {
 
   submitPost(){
     console.log(this.form.value);
+    const startDate = this.form.value.startDateControl ? new Date(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day) : null;
+    const endDate = this.form.value.endDateControl ? new Date(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day) : null;
 
-    // this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.authService.getUserId()}`,this.form.value).subscribe((resultData : any) => {
-    //     let result : any = resultData;
-    //     console.log(result);
-    // });
+    const formData = {
+      topic: this.form.value.topic,
+      content: this.form.value.content,
+      startDate: startDate,
+      endDate: endDate
+    };
 
-    this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.authService.getUserId()}`, this.form.value, { responseType: 'text' })
+    this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.authService.getUserId()}`, formData, { responseType: 'text' })
     .subscribe(
       (resultData: any) => {
         let result : any = resultData;

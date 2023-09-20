@@ -17,6 +17,18 @@
       </div>
     </div>
 
+    <!-- Start Date Picker -->
+    <div class="form-group">
+      <label for="startDate">Start Date :  </label>
+      <ngb-datepicker formControlName="startDateControl" name="startDate"></ngb-datepicker>
+    </div>
+    <br>
+    <!-- End Date Picker -->
+    <div class="form-group">
+      <label for="endDate">End Date :  </label>
+      <ngb-datepicker formControlName="endDateControl" name="endDate"></ngb-datepicker>
+    </div>
+
     <br>
 
     <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit Post</button>
