@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
       this.loadPostData();
     }
   }
-  
+
   loadUserData(){
     this.http.get(`http://localhost:8085/api/v1/user/getuser?email=${this.userEmail}`).subscribe((data:any)=> {
         this.userData = data;
@@ -56,4 +56,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl("/newpost");
   }
 
+  editPost(postId : number){
+    this.router.navigate(['/editPost',postId]);
+  }
 }

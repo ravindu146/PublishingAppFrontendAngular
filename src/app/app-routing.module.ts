@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { NewpostComponent } from './newpost/newpost.component';
+import { EditpostComponent } from './editpost/editpost.component';
 
 
 const routes: Routes = [
@@ -33,11 +34,14 @@ const routes: Routes = [
     path : 'newpost',
     component : NewpostComponent
   },
-
+  {
+    path : 'editPost/:postId',
+    component : EditpostComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class AppRoutingModule { }

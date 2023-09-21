@@ -13,7 +13,7 @@
     <!-- Display user's posts -->
     <div class="mt-4" *ngIf="postDataForUser && postDataForUser.length > 0">
       <h2>Your Posts</h2>
-      <div *ngFor="let post of postDataForUser" class="card post-card">
+      <div *ngFor="let post of postDataForUser" class="card post-card card-hover" (click)="editPost(post.postId)">
         <div class="card-body">
           <h3 class="card-title">{{ post.topic }}</h3>
           <p class="card-text">{{ post.content }}</p>

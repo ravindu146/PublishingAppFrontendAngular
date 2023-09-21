@@ -1,3 +1,9 @@
 .post-card {
   margin-bottom: 20px;
 }
+
+.card-hover:hover {
+  background-color: #f0f0f0; 
+  transform: scale(1.05); 
+  cursor: pointer; 
+}

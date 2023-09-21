@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditpostComponent } from './editpost/editpost.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     ProfileComponent,
     EditComponent,
-    NewpostComponent
+    NewpostComponent,
+    EditpostComponent
   ],
   imports: [
   BrowserModule,
