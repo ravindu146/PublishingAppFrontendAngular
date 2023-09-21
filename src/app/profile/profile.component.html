@@ -13,11 +13,24 @@
     <!-- Display user's posts -->
     <div class="mt-4" *ngIf="postDataForUser && postDataForUser.length > 0">
       <h2>Your Posts</h2>
+      <br>
       <div *ngFor="let post of postDataForUser" class="card post-card card-hover" (click)="editPost(post.postId)">
         <div class="card-body">
           <h3 class="card-title">{{ post.topic }}</h3>
           <p class="card-text">{{ post.content }}</p>
-          <!-- Add more details as needed -->
+          <!-- Nested card for Start Date -->
+          <div *ngIf="post.startDate" class="card">
+            <div class="card-body">
+              <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+            </div>
+          </div>
+
+          <!-- Nested card for End Date -->
+          <div *ngIf="post.endDate" class="card">
+            <div class="card-body">
+              <p><strong>End Date:</strong> {{ post.endDate }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

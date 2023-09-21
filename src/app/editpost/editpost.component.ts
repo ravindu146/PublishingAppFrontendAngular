@@ -54,18 +54,29 @@ export class EditpostComponent implements OnInit {
   update(){
     console.log(this.form.value);
 
+    console.log(this.form.value);
+    const startDate = this.form.value.startDateControl ? new Date(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day) : null;
+    const endDate = this.form.value.endDateControl ? new Date(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day) : null;
 
-    // this.http.put(`http://localhost:8085/api/v1/user/update?email=${this.userEmail}`,this.form.value).subscribe((resultData: any)=>{
-    //   let result = resultData;
+    const formData = {
+      topic: this.form.value.topic,
+      content: this.form.value.content,
+      startDate: startDate,
+      endDate: endDate
+    };
 
-    //   if (result.message == "User Updated successfully!"){
-    //       alert("User Details Updated Successfully");
-    //       this.router.navigateByUrl("/profile");
-    //   }
-    //   else {
-    //     alert("Data Did not update successfully");
-    //   }
-    // });
+
+    this.http.put(`http://localhost:8085/api/v1/posts/update?postId=${this.postId}`,formData).subscribe((resultData: any)=>{
+      let result = resultData;
+
+      if (result.message == "Data Updated Successfully"){
+          alert("Post Details Updated Successfully");
+          this.router.navigateByUrl("/profile");
+      }
+      else {
+        alert("Post data Did not update successfully");
+      }
+    });
   }
 
 }
