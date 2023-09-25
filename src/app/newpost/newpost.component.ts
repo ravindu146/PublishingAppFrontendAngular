@@ -30,8 +30,8 @@ export class NewpostComponent implements OnInit {
 
   submitPost(){
     console.log(this.form.value);
-    const startDate = this.form.value.startDateControl ? new Date(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day) : null;
-    const endDate = this.form.value.endDateControl ? new Date(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day) : null;
+    const startDate = this.form.value.startDateControl ? new Date(Date.UTC(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day)) : null;
+    const endDate = this.form.value.endDateControl ? new Date(Date.UTC(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day)) : null;
 
     const formData = {
       topic: this.form.value.topic,

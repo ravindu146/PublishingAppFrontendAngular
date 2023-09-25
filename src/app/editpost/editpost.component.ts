@@ -49,14 +49,14 @@ export class EditpostComponent implements OnInit {
     }
     return null;
   }
-  
+
 
   update(){
+    console.log("This is data taken when you just submit the form");
     console.log(this.form.value);
 
-    console.log(this.form.value);
-    const startDate = this.form.value.startDateControl ? new Date(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day) : null;
-    const endDate = this.form.value.endDateControl ? new Date(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day) : null;
+    const startDate = this.form.value.startDateControl ? new Date(Date.UTC(this.form.value.startDateControl.year, this.form.value.startDateControl.month -1, this.form.value.startDateControl.day)) : null;
+    const endDate = this.form.value.endDateControl ? new Date(Date.UTC(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day)) : null;
 
     const formData = {
       topic: this.form.value.topic,
@@ -64,6 +64,9 @@ export class EditpostComponent implements OnInit {
       startDate: startDate,
       endDate: endDate
     };
+
+    console.log("This is data after modifications");
+    console.log(formData);
 
 
     this.http.put(`http://localhost:8085/api/v1/posts/update?postId=${this.postId}`,formData).subscribe((resultData: any)=>{
