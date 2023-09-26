@@ -17,6 +17,13 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="image">Image Upload</label>
+      <input type="file" class="form-control-file" id="image" (change)="onImageSelected($event)" accept="image/*">
+    </div>
+
+    <br>
+
     <!-- Start Date Picker -->
     <div class="form-group">
       <label for="startDate">Start Date :  </label>

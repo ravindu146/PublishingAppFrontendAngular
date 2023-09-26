@@ -12,6 +12,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewpostComponent implements OnInit {
 
+  selectedImage: File | null = null;
+
   constructor(private http: HttpClient , private router: Router, private authService: AuthService ) { }
 
   ngOnInit(): void {
@@ -21,7 +23,8 @@ export class NewpostComponent implements OnInit {
     topic: new FormControl('', [Validators.required, Validators.minLength(3)]),
     content: new FormControl('', [Validators.required, Validators.minLength(3)]),
     startDateControl: new FormControl(null),
-    endDateControl: new FormControl(null)
+    endDateControl: new FormControl(null),
+    imageName: new FormControl(null)
   });
 
   get f(){
@@ -30,14 +33,19 @@ export class NewpostComponent implements OnInit {
 
   submitPost(){
     console.log(this.form.value);
+
+    const imageFileName = this.form.value.imageName;
+
+    const { imageName, ...postData } = this.form.value;
+
     const startDate = this.form.value.startDateControl ? new Date(Date.UTC(this.form.value.startDateControl.year, this.form.value.startDateControl.month - 1, this.form.value.startDateControl.day)) : null;
     const endDate = this.form.value.endDateControl ? new Date(Date.UTC(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day)) : null;
 
     const formData = {
-      topic: this.form.value.topic,
-      content: this.form.value.content,
+      ...postData,
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
+      imageName: imageFileName
     };
 
     this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.authService.getUserId()}`, formData, { responseType: 'text' })
@@ -45,13 +53,40 @@ export class NewpostComponent implements OnInit {
       (resultData: any) => {
         let result : any = resultData;
         alert(result);
-        // Handle the success response here
       },
       (error) => {
         console.error(error);
-        // Handle the error here, display an error message, or take appropriate action
       }
     );
+  }
+
+  onImageSelected(event: any) {
+    const files = event.target.files;
+    if (files.length > 0) {
+      this.selectedImage = files[0];
+
+      this.uploadImage();
+    }
+  }
+
+  uploadImage() {
+    if (!this.selectedImage) {
+      console.log("No image selected for upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', this.selectedImage);
+
+    this.http.post('http://localhost:8085/api/v1/posts/upload-image', formData)
+      .subscribe(
+        (imageResponse: any) => {
+          this.form.patchValue({ imageName: imageResponse.imageName });
+        },
+        (error) => {
+          console.error('Error uploading image:', error);
+        }
+      );
   }
 
 
