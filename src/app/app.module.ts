@@ -14,6 +14,7 @@ import { NewpostComponent } from './newpost/newpost.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditpostComponent } from './editpost/editpost.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     EditComponent,
     NewpostComponent,
     EditpostComponent,
-    NavbarComponent
+    NavbarComponent,
+    NewsfeedComponent
   ],
   imports: [
   BrowserModule,

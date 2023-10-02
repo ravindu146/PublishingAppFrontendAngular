@@ -1,0 +1,36 @@
+
+<div class="container mt-4">
+  <h1>News Feed</h1>
+  <div *ngIf="postDataForUser">
+
+    <!-- Display user's posts -->
+    <div class="mt-4" *ngIf="postDataForUser && postDataForUser.length > 0">
+      <div *ngFor="let post of postDataForUser" class="card post-card card-hover">
+        <div class="card-body">
+          <h3 class="card-title">{{ post.topic }}</h3>
+          <p class="card-text">{{ post.content }}</p>
+          <img *ngIf = "post.imageName" class="custom-image" [src]="'http://localhost:8085/api/v1/posts/image/' + post.imageName" alt="Post Image">
+          <br>
+          <br>
+          <!-- Nested card for Start Date -->
+          <div *ngIf="post.startDate" class="card">
+            <div class="card-body">
+              <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+            </div>
+          </div>
+
+          <!-- Nested card for End Date -->
+          <div *ngIf="post.endDate" class="card">
+            <div class="card-body">
+              <p><strong>End Date:</strong> {{ post.endDate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!postDataForUser">
+    <p>Loading data...</p>
+  </div>
+
+</div>

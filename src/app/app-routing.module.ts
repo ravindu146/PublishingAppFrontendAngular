@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { EditpostComponent } from './editpost/editpost.component';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,10 @@ const routes: Routes = [
   {
     path : 'editPost/:postId',
     component : EditpostComponent
-  }
+  },{
+    path : 'newsFeed',
+    component : NewsfeedComponent
+  },
 ];
 
 @NgModule({

@@ -2,3 +2,21 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.post-card {
+  margin-bottom: 20px;
+}
+
+.card-hover:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+// /* Define a CSS class for image sizing */
+.custom-image {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+}
+
