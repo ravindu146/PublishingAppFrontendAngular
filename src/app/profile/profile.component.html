@@ -19,6 +19,8 @@
           <h3 class="card-title">{{ post.topic }}</h3>
           <p class="card-text">{{ post.content }}</p>
           <img *ngIf = "post.imageName" class="custom-image" [src]="'http://localhost:8085/api/v1/posts/image/' + post.imageName" alt="Post Image">
+          <br>
+          <br>
           <!-- Nested card for Start Date -->
           <div *ngIf="post.startDate" class="card">
             <div class="card-body">
