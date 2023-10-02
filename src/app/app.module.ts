@@ -13,6 +13,7 @@ import { EditComponent } from './edit/edit.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditpostComponent } from './editpost/editpost.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditpostComponent } from './editpost/editpost.component';
     ProfileComponent,
     EditComponent,
     NewpostComponent,
-    EditpostComponent
+    EditpostComponent,
+    NavbarComponent
   ],
   imports: [
   BrowserModule,
