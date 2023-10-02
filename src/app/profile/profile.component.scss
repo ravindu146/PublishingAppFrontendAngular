@@ -3,7 +3,14 @@
 }
 
 .card-hover:hover {
-  background-color: #f0f0f0; 
-  transform: scale(1.05); 
-  cursor: pointer; 
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+  cursor: pointer;
 }
+
+// /* Define a CSS class for image sizing */
+.custom-image {
+  max-width: 100%;
+  height: auto;
+}
+
