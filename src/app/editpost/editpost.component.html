@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h1>Add New Post</h1>
+  <h1>Update Post</h1>
   <form [formGroup]="form" (ngSubmit)="update()">
     <div class="form-group">
       <label for="topic">Topic/Title</label>
@@ -16,6 +16,20 @@
         <div *ngIf="f.content.errors.required">Content is required.</div>
       </div>
     </div>
+
+    <div class="form-group" *ngIf="this.userData.imageName">
+      <label for="existingImage">Existing Image:</label>
+      <img  class="custom-image" [src]="'http://localhost:8085/api/v1/posts/image/' + this.userData.imageName" alt="Post Image">
+      <!-- <img [src]="existingImageUrl" alt="Existing Image" class="img-thumbnail" id="existingImage"> -->
+      <p class="mt-2">{{ this.userData.imageName }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image Upload</label>
+      <input type="file" class="form-control-file" id="image" (change)="onImageSelected($event)" accept="image/*">
+    </div>
+
+    <br>
 
     <!-- Start Date Picker -->
     <div class="form-group">

@@ -14,6 +14,7 @@ export class EditpostComponent implements OnInit {
   postId : number;
   userData : any;
   form: FormGroup;
+  selectedImage: File | null = null;
 
   constructor(private route : ActivatedRoute, private http: HttpClient ,private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
     this.route.params.subscribe(params => {
@@ -36,6 +37,7 @@ export class EditpostComponent implements OnInit {
         this.form = this.formBuilder.group({
           topic: [this.userData.topic, [Validators.required, Validators.minLength(3)]],
           content: [this.userData.content, [Validators.required, Validators.minLength(3)]],
+          imageName:[this.userData.imageName, []],
           startDateControl: this.userData.startDate==null?[[this.userData.startDate],null]:[this.convertToNgbDate(this.userData.startDate), null],
           endDateControl:  this.userData.endDate==null?[[this.userData.endDate],null]:[this.convertToNgbDate(this.userData.endDate), null]
         });
@@ -50,22 +52,63 @@ export class EditpostComponent implements OnInit {
     return null;
   }
 
+  onImageSelected(event: any) {
+    const files = event.target.files;
+    if (files.length > 0) {
+      this.selectedImage = files[0];
+      console.log(this.selectedImage);
+
+      this.uploadImage();
+    }
+  }
+
+  uploadImage() {
+    if (!this.selectedImage) {
+      console.log("No image selected for upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', this.selectedImage);
+
+    this.http.post('http://localhost:8085/api/v1/posts/upload-image', formData)
+      .subscribe(
+        (imageResponse: any) => {
+          this.form.patchValue({ imageName: imageResponse.imageName });
+        },
+        (error) => {
+          console.error('Error uploading image:', error);
+        }
+      );
+  }
+
 
   update(){
     console.log("This is data taken when you just submit the form");
     console.log(this.form.value);
 
+    const imageFileName = this.form.value.imageName;
+
+    const { imageName, ...postData } = this.form.value;
+
     const startDate = this.form.value.startDateControl ? new Date(Date.UTC(this.form.value.startDateControl.year, this.form.value.startDateControl.month -1, this.form.value.startDateControl.day)) : null;
     const endDate = this.form.value.endDateControl ? new Date(Date.UTC(this.form.value.endDateControl.year, this.form.value.endDateControl.month - 1, this.form.value.endDateControl.day)) : null;
 
+    // const formData = {
+    //   topic: this.form.value.topic,
+    //   content: this.form.value.content,
+    //   startDate: startDate,
+    //   endDate: endDate
+    // };
+
     const formData = {
-      topic: this.form.value.topic,
-      content: this.form.value.content,
+      ...postData,
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
+      imageName: imageFileName
     };
 
-    console.log("This is data after modifications");
+    console.log("This is post values just before update ");
     console.log(formData);
 
 
