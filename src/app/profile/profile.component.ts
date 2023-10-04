@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../Services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SessionService } from './../Services/session.service';
 
 
 @Component({
@@ -15,12 +16,17 @@ export class ProfileComponent implements OnInit {
   userId : number | null = null;
   userData : any;
   postDataForUser : any;
+  userSession : any;
 
-  constructor(private authService: AuthService , private http : HttpClient , private router : Router) { }
+  constructor( private http : HttpClient , private router : Router, private sessionService: SessionService) { }
 
   ngOnInit(): void {
-    this.userEmail = this.authService.getUserEmail();
-    this.userId = this.authService.getUserId();
+    this.userSession = this.sessionService.getSessionData();
+    // this.userEmail = this.authService.getUserEmail();
+    // this.userId = this.authService.getUserId();
+
+    this.userEmail = this.userSession.email;
+    this.userId = this.userSession.userId;
 
     if(this.userEmail){
       this.loadUserData();
@@ -33,14 +39,12 @@ export class ProfileComponent implements OnInit {
   loadUserData(){
     this.http.get(`http://localhost:8085/api/v1/user/getuser?email=${this.userEmail}`).subscribe((data:any)=> {
         this.userData = data;
-        console.log(this.userData);
       });
   }
 
   loadPostData(){
     this.http.get(`http://localhost:8085/api/v1/posts/user/${this.userId}/posts`).subscribe((postData:any)=>{
         this.postDataForUser = postData;
-        console.log(this.postDataForUser);
       });
   }
 

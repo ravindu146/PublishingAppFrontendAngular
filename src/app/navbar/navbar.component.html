@@ -12,7 +12,7 @@
         <a class="nav-link" href="/newsFeed">News Feed</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/profile">Profile <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/profile" *ngIf="isLoggedIn">Profile <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,9 +30,13 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
+      <span class="navbar-text mr-3" *ngIf="isLoggedIn">
+        Welcome {{this.name}}
+      </span>
       <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
       <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-      <button type="button" class="btn btn-danger position-absolute top-0 end-0 mt-2 me-2" (click)="logout()">Logout</button>
+      <!-- <button type="button" class="btn btn-danger position-absolute top-0 end-0 mt-2 me-2" (click)="logout()">Logout</button> -->
+      <button type="button" class="btn btn-danger my-2 my-sm-0" (click)="logout()">Logout</button>
     </form>
   </div>
 </nav>

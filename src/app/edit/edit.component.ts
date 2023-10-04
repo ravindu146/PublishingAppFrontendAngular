@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder,} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../Services/auth.service';
+import { SessionService } from './../Services/session.service';
 
 @Component({
   selector: 'app-edit',
@@ -14,26 +14,19 @@ export class EditComponent implements OnInit {
   userEmail : String;
   userData : any;
   form: FormGroup;
+  sessionData : any;
 
-  constructor(private http: HttpClient ,private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private http: HttpClient ,private formBuilder: FormBuilder, private router: Router, private sessionService:SessionService) { }
 
   ngOnInit(): void {
 
-    this.userEmail = this.authService.getUserEmail();
+    this.sessionData = this.sessionService.getSessionData();
+    this.userEmail = this.sessionData.email;
 
     if(this.userEmail){
-      // call the formBuilder
       this.buildForm();
     }
   }
-
-  // form = new FormGroup({
-  //   name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  //   email: new FormControl('', [Validators.required, Validators.email]),
-  //   mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-  //   password: new FormControl('', [Validators.required]),
-
-  // });
 
   get f(){
     return this.form.controls;

@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditpostComponent } from './editpost/editpost.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { AuthService } from './Services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

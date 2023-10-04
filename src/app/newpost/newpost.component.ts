@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { AuthService } from '../Services/auth.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { SessionService } from './../Services/session.service';
 
 @Component({
   selector: 'app-newpost',
@@ -13,11 +13,15 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 export class NewpostComponent implements OnInit {
 
   selectedImage: File | null = null;
+  sessionData : any;
 
-  constructor(private http: HttpClient , private router: Router, private authService: AuthService ) { }
+  constructor(private http: HttpClient , private router: Router, private sessionService: SessionService ) { }
 
   ngOnInit(): void {
+    this.sessionData = this.sessionService.getSessionData();
   }
+
+
 
   form = new FormGroup({
     topic: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -48,7 +52,7 @@ export class NewpostComponent implements OnInit {
       imageName: imageFileName
     };
 
-    this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.authService.getUserId()}`, formData, { responseType: 'text' })
+    this.http.post(`http://localhost:8085/api/v1/posts/save?userId=${this.sessionData.userId}`, formData, { responseType: 'text' })
     .subscribe(
       (resultData: any) => {
         let result : any = resultData;

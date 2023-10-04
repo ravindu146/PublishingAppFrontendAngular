@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class SessionService {
   private readonly STORAGE_KEY = 'user_session';
 
-  constructor(private sessionService: SessionService) {}
+  constructor() {}
 
   setSessionData(data: any) {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
