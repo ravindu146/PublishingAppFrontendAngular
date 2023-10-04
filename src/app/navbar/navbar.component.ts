@@ -25,8 +25,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.sessionData = this.sessionService.getSessionData();
-    this.name = this.sessionData.name;
-    // this.isLoggedIn = this.authService.isLoggedIn();
+    if (this.sessionData && this.sessionData.name) {
+      this.name = this.sessionData.name;
+    }
   }
 
   logout(){
