@@ -41,8 +41,12 @@
 
     <br>
 
-    <!-- <button type="submit" (click)="save()" class="btn btn-primary">Submit</button> -->
+    <div class="button-container">
+      <!-- <button type="submit" (click)="save()" class="btn btn-primary">Submit</button> -->
     <button type="submit" [disabled]="!form.valid"  class="btn btn-primary">Submit</button>
+    <button type="button" routerLink="" class="btn btn-secondary">Back</button>
+    </div>
+
   </form>
 </div>
 

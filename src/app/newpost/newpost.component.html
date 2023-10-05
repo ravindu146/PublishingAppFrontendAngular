@@ -38,7 +38,12 @@
 
     <br>
 
-    <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit Post</button>
+    <div class="button-container">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit Post</button>
+      <button type="button" routerLink="/profile" class="btn btn-secondary">Back</button>
+    </div>
   </form>
 </div>
+
+<br>
 
