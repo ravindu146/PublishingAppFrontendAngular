@@ -57,6 +57,7 @@ export class NewpostComponent implements OnInit {
       (resultData: any) => {
         let result : any = resultData;
         alert(result);
+        this.router.navigateByUrl("/profile");
       },
       (error) => {
         console.error(error);

@@ -60,5 +60,9 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  getLoggedInStatus(){
+    return this.loggedIn.toPromise();
+  }
+
 
 }
