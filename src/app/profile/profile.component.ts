@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   logout(){
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
   }
 
   goToNewPostPage(){

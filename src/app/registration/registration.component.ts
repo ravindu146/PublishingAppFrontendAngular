@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
         {
           let userId :number = resultData;
           alert("Employee Registered successfully");
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl("/login");
         });
     }
     else {

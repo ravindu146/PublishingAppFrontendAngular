@@ -39,16 +39,21 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.sessionService.clearSession();
     this.authService.logout();
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
   }
 
   private async loadUserData() {
     this.sessionData = this.sessionService.getSessionData();
     this.name = this.sessionData.name;
+    // Convert the name to lowercase
+    const lowercaseName = this.name.toLowerCase();
+
+    // Convert the first letter to uppercase
+    this.name = lowercaseName.charAt(0).toUpperCase() + lowercaseName.slice(1);
   }
 
   goToLoginPage(){
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/login");
   }
 
 }

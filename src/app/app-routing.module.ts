@@ -14,14 +14,15 @@ import { AuthGuard } from './Services/guards/auth.guard';
 const routes: Routes = [
   {
     path : '',
-    component : LoginComponent,
-    // canActivate : [AuthGuard]
+    component: HomeComponent,
   },
   {
-    path : 'home',
-    component: HomeComponent
-  }
-  ,{
+    path : 'login',
+    component : LoginComponent,
+    // canActivate : [AuthGuard]
+
+  },
+  {
     path : 'register',
     component : RegistrationComponent
   },
