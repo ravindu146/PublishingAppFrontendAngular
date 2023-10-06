@@ -16,6 +16,7 @@ import { EditpostComponent } from './editpost/editpost.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { AuthService } from './Services/auth.service';
+import { AuthGuard } from './Services/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { AuthService } from './Services/auth.service';
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
