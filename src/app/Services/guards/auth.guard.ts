@@ -18,10 +18,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.sessionData = this.sessionService.getSessionData();
       if(this.sessionData){
-        if(state.url === "/"){
-          this.router.navigate(['/profile'])
-          return false;
-        }
+        // if(state.url === "/"){
+        //   this.router.navigate(['/profile'])
+        //   return false;
+        // }
         return true;
       } else{
         this.router.navigate(['/']);

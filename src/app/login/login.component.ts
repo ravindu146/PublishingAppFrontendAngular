@@ -12,6 +12,8 @@ import { SessionService } from './../Services/session.service';
 })
 export class LoginComponent implements OnInit {
 
+  sessionData : any;
+
   constructor(private http: HttpClient, private router: Router, private authService:AuthService, private sessionService: SessionService){}
 
   form = new FormGroup({
@@ -24,6 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sessionData = this.sessionService.getSessionData();
+    if(this.sessionData){
+      this.router.navigate(['/profile']);
+    }
   }
 
 
